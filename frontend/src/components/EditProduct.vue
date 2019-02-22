@@ -1,32 +1,41 @@
 <template>
   <div class="edit">
-
+    <div class="product-form">
+      <ProductForm 
+      :productToEdit="getProductById(id)"
+      @formValid="editedProduct => sendEdit(editedProduct)" />
+    </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import ProductForm from './ProductForm'
 
 export default {
   name: 'EditProduct',
+  components: {
+    ProductForm
+  },
   props: {
-    productId: {
-      type: Number,
+    id: {
+      type: [Number, String],
       required: true,
+      validator(value) {
+        return Number.isInteger(value)
+      },
     },
   },
-  created() {
-    this.product = this.getProductById(productId)
-  },
   methods: {
-    ...mapGetters('product', ['getProductById']),
-    ...mapActions('product', )
-  },
-  data() {
-    return {
-      product: null,
+    ...mapActions('product', ['editProductById']),
+    sendEdit(editedProduct) {
+      this.editProductById(editedProduct)
+      this.$router.push('/dashboard')
     }
-  }
+  },
+  computed: {
+    ...mapGetters('product', ['getProductById']),
+  },
 }
 </script>
 

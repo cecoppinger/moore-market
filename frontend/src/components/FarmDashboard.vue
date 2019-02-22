@@ -33,7 +33,14 @@
               <td>{{item.price}}</td>
               <td>{{item.quantity}}</td>
               <td>{{item.description}}</td>
-              <td><a v-bind:href="'/products/edit/?id='+item.id">Edit</a> | <button @click="removeProduct(item.id)">Remove</button></td>  
+              <td><router-link :to="{
+                name: 'EditProduct',
+                params: {
+                  id: item.id,
+                  }
+                }"
+                >
+                Edit</router-link> | <button @click="removeProduct(item.id)">Remove</button></td>  
             </tr>
           </tbody>  
       </table>
