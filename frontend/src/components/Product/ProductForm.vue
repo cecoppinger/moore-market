@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <form @submit.prevent="validateForm()"> 
+    <form @submit.prevent="validateForm"> 
 
       <div class="form-group row justify-content-center">
         <label for="name" class="col-md-2 col-form-label left-align">Name:</label>
@@ -154,7 +154,7 @@
       </div>  
 
       <div class="center-align">
-        <button class="btn btn-primary" type="button">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
       </div>
       
     </form>
@@ -249,6 +249,7 @@ export default {
         this.product.userId = this.currentUser.id
         if(this.formType === 'add') {
           let res = await this.addNewProduct(this.product)
+          console.log(res)
           if (res.data) {
             let productId = res.data.id
             this.$router.push({ path: `/product/${productId}`})
@@ -333,6 +334,13 @@ export default {
       },
     }
   },
+
+  async created(){
+    await this.getAllCategoriesFromApi()
+    if (this.formType === 'edit') {
+      this.product = this.productToEdit
+    }
+  }
 }
 </script>
 

@@ -7,13 +7,13 @@
 
     </div>
 
-    <product-form :productToEdit='getProduct' :formType='formType'> </product-form>
+    <product-form :productToEdit='getProductById(productId)' :formType='formType'> </product-form>
 
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 
 
 import ProductForm from './ProductForm.vue'
@@ -36,11 +36,15 @@ export default {
   computed: {
       ...mapGetters('product', ['getProductById']),
 
-      getProduct() {
-            let gotProduct = this.getProductById(this.productId)
-            return gotProduct
-          }
     },
+  methods: {
+    ...mapActions('product', [
+      'getAllProductsFromApi'
+    ])
+  },
+  async created() {
+    await this.getAllProductsFromApi()
+  }
 }
 
 </script>
