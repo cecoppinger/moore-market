@@ -60,6 +60,7 @@ namespace MooreMarket.Controllers
           return Ok(new {
             Id = user.Id,
             Username = user.Username,
+            AccountType = user.AccountType,
             Token = tokenString
           });
         }
