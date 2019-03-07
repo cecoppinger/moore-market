@@ -1,6 +1,6 @@
 <template>
     <div class='container-fluid'>
-        <form v-on:submit.prevent="onSubmit">
+        <form v-on:submit.prevent="">
             <div class="form-group-sm">
                 <input v-model='categoryName' @input='sendCategory()' type="text" class="form-control form-control-sm" id="CategoryName" placeholder="New Category Name">
             </div>

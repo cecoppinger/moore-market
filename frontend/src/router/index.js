@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import HelloWorld from '../components/HelloWorld.vue'
+import Login from '../components/Login.vue'
 import Dashboard from '../components/Dashboard.vue'
 import ProductHomePage from '../components/Product/ProductHomepage.vue'
 import ManageCategories from '../components/Product/ManageCategories.vue'
@@ -72,5 +73,10 @@ export default new Router({
     name: 'ShoppingCart',
     path: '/products/cart',
     component: ShoppingCart,
-  }],
+  }, {
+    name: 'Login',
+    path: '/login',
+    component: Login
+  }
+  ],
 })
