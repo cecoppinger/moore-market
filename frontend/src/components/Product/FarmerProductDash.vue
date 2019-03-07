@@ -12,7 +12,8 @@
                 </tr>
             </thead>
             <tbody>
-                <farmer-product-item v-for='product in vendorProducts.products' :key='product.id' :product='product'> </farmer-product-item>
+                
+                <farmer-product-item v-for='product in currentVendor.products' :key='product.id' :product='product'> </farmer-product-item>
 
             </tbody>
         </table>
@@ -36,27 +37,21 @@ export default {
 
     computed: {
         ...mapState('vendor', [
-          'vendorProducts'
+          'currentVendor'
+        ]),
+        ...mapState('user', [
+          'currentUser'
         ]),
     },
 
     methods: {
         ...mapActions('vendor', [
-            'getVendorProducts'
+            'getVendor'
         ])
     },
 
-    methods: {
-        ...mapActions('product', [
-            'getAllProductsFromApi'
-        ]),
-        
-
-    },
-
     async created() {
-        await this.getAllProductsFromApi()
-        await this.getVendorProducts(this.currentUser.id)
+        await this.getVendor(this.currentUser.id)
         
     },
 }

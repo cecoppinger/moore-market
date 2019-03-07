@@ -141,7 +141,6 @@ export default {
 
         async removeProduct() {
             await this.removeProductById(this.product.id)
-            await this.getUserProducts(this.currentUser.id)
         },
 
         async editProduct(changedProperty) {
@@ -168,7 +167,6 @@ export default {
             }
             
             let response = await this.editProductById(editedProduct)
-            await this.getUserProducts(this.currentUser.id)
             
             if (response.status === 400) {
                 //Failed backend validation
@@ -231,9 +229,6 @@ export default {
             'editProductById',
             'removeProductById'
         ]),
-        ...mapActions('user', [
-            'getUserProducts'
-        ])
     }
 }
 </script>
