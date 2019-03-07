@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MooreMarket.Data;
 using MooreMarket.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MooreMarket.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
@@ -19,7 +21,8 @@ namespace MooreMarket.Controllers
 
         }
         
-        //GET Categories/
+        //GET api/Categories/
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(204)]
@@ -35,7 +38,8 @@ namespace MooreMarket.Controllers
             return Ok(allCategories);
         }
 
-        //GET Categories/{id}
+        //GET api/Categories/{id}
+        [AllowAnonymous]
         [HttpGet("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -51,7 +55,7 @@ namespace MooreMarket.Controllers
             return Ok(category);
         }
 
-        //POST Categories/Add
+        //POST api/Categories/Add
         [HttpPost("Add")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]

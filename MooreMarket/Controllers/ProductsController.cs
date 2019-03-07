@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MooreMarket.Data;
 using MooreMarket.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace MooreMarket.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
-    //[Authorize]
     [ApiController]
     public class ProductsController : ControllerBase
     {
@@ -21,6 +23,7 @@ namespace MooreMarket.Controllers
         }
         
         //GET Products/
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(204)]
@@ -42,6 +45,7 @@ namespace MooreMarket.Controllers
         }
 
         //GET Products/{id}
+        [AllowAnonymous]
         [HttpGet("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -116,7 +120,7 @@ namespace MooreMarket.Controllers
 
             return NoContent();
         }
-        
+        [AllowAnonymous]
         [HttpGet("Search")]
         public ActionResult<IEnumerable<Product>> Search(string searchTerm)
         {
