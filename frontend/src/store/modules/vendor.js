@@ -4,7 +4,7 @@ const vendor = {
   namespaced: true,
   state: {
     allVendors: [],
-    currentVendor: null,
+    currentVendor: {},
   },
 
   mutations: {
@@ -27,11 +27,11 @@ const vendor = {
         console.log(error);
       }
     },
-    async getVendor({ commit }, id) {
+    async getVendor({commit}, id) {
       let response
       try {
         response = await axios.get('/api/vendors/'+ id);
-        commit('setVendorProducts', response.data);
+        commit('setCurrentVendor', response.data);
       } catch(error) {
         console.log(error);
       }
