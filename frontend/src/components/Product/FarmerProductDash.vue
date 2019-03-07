@@ -12,7 +12,7 @@
                 </tr>
             </thead>
             <tbody>
-                <farmer-product-item v-for='product in farmerProducts.products' :key='product.id' :product='product'> </farmer-product-item>
+                <farmer-product-item v-for='product in vendorProducts.products' :key='product.id' :product='product'> </farmer-product-item>
 
             </tbody>
         </table>
@@ -31,20 +31,18 @@ export default {
     
     data() {
         return {
-            //temporary
-            id: 2
         }
     },
 
     computed: {
-        ...mapState('farmer', [
-          'farmerProducts'
+        ...mapState('vendor', [
+          'vendorProducts'
         ]),
     },
 
     methods: {
-        ...mapActions('farmer', [
-            'getFarmerProducts'
+        ...mapActions('vendor', [
+            'getVendorProducts'
         ])
     },
 
@@ -52,16 +50,13 @@ export default {
         ...mapActions('product', [
             'getAllProductsFromApi'
         ]),
-        ...mapActions('user', [
-            'getUserProducts'
-        ]),
         
 
     },
 
     async created() {
         await this.getAllProductsFromApi()
-        await this.getUserProducts(this.currentUser.id)
+        await this.getVendorProducts(this.currentUser.id)
         
     },
 }

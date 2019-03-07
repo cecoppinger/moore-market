@@ -6,7 +6,7 @@ namespace MooreMarket.Models
 {
     public enum AccountType
     {
-        Farmer,
+        Vendor,
         User
     }
   public class UserModel

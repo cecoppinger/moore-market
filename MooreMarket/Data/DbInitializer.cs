@@ -15,14 +15,14 @@ namespace MooreMarket.Data
             {
                 Username = "farmer1",
                 Password = "password",
-                AccountType = AccountType.Farmer
+                AccountType = AccountType.Vendor
             };
 
             UserModel farmer2 = new UserModel
             {
                 Username = "farmer2",
                 Password = "password",
-                AccountType = AccountType.Farmer
+                AccountType = AccountType.Vendor
             };
 
             UserModel user1 = new UserModel
