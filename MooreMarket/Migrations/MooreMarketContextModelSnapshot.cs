@@ -27,13 +27,13 @@ namespace MooreMarket.Migrations
 
                     b.Property<string>("Image");
 
-                    b.Property<bool>("IsPerishable");
+                    b.Property<int>("IsPerishable");
 
-                    b.Property<bool>("KeepFreezer");
+                    b.Property<int>("KeepFreezer");
 
-                    b.Property<bool>("KeepFridge");
+                    b.Property<int>("KeepFridge");
 
-                    b.Property<bool>("KeepRoom");
+                    b.Property<int>("KeepRoom");
 
                     b.Property<string>("Name");
 

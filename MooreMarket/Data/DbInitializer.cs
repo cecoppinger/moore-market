@@ -62,7 +62,7 @@ namespace MooreMarket.Data
                 Category = TestCat1,
                 Quantity = 1,
                 Price = 5.50f,
-                IsPerishable = false,
+                IsPerishable = 0,
                 UserId = 1
             };
 
@@ -73,12 +73,12 @@ namespace MooreMarket.Data
               CategoryId = 1,
               Quantity = 11,
               Price = 1.11f,
-              IsPerishable = true,
-              KeepRoom = true,
+              IsPerishable = 1,
+              KeepRoom = 1,
               ShelfLifeRoom = "some time",
-              KeepFridge = true,
+              KeepFridge = 1,
               ShelfLifeFridge = "something",
-              KeepFreezer = true,
+              KeepFreezer = 1,
               ShelfLifeFreezer = "something",
               UserId = 1
             };
@@ -91,8 +91,8 @@ namespace MooreMarket.Data
               CategoryId = 1,
               Quantity = 6,
               Price = 12.22f,
-              IsPerishable = true,
-              KeepRoom = true,
+              IsPerishable = 1,
+              KeepRoom = 1,
               ShelfLifeRoom = "shelf life",
               UserId = 1
             };

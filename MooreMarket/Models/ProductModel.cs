@@ -11,12 +11,12 @@ namespace MooreMarket.Models
         
         public int Quantity {get; set;}
         public float Price {get;set;}
-        public bool IsPerishable {get; set;}
-        public bool KeepRoom {get; set;}
+        public int IsPerishable {get; set;}
+        public int KeepRoom {get; set;}
         public string ShelfLifeRoom {get; set;}
-        public bool KeepFridge {get; set;}
+        public int KeepFridge {get; set;}
         public string ShelfLifeFridge {get; set;}
-        public bool KeepFreezer {get; set;}
+        public int KeepFreezer {get; set;}
         public string ShelfLifeFreezer {get; set;}
         public string Image {get;set;}
 
@@ -27,7 +27,7 @@ namespace MooreMarket.Models
         {
 
         }
-        public Product(string name, string description, int categoryId, int quantity, float price, bool isPerishable, bool keepRoom, string shelfLifeRoom, bool keepFridge, string shelfLifeFridge, bool keepFreezer, string shelfLifeFreezer, string image)
+        public Product(string name, string description, int categoryId, int quantity, float price, int isPerishable, int keepRoom, string shelfLifeRoom, int keepFridge, string shelfLifeFridge, int keepFreezer, string shelfLifeFreezer, string image)
         {
             Name = name;
             Description = description;
