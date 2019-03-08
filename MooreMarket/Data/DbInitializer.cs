@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MooreMarket.Models;
@@ -153,6 +154,48 @@ namespace MooreMarket.Data
             };
             context.Add(newProduct7);
 
+            context.SaveChanges();
+
+            Message farmer1messageA = new Message 
+            {
+                Title = "Message A Title",
+                Body = "Here's a body of Message A",
+                StartDate = DateTime.Today.Date,
+                EndDate = DateTime.Today.AddDays(7),
+                UserId = 1
+            };
+
+            Message farmer1messageB = new Message 
+            {
+                Title = "Message B Title",
+                Body = "Here's a body of Message B",
+                StartDate = DateTime.Today,
+                EndDate = DateTime.Today.AddDays(14),
+                UserId = 1
+            };
+
+            Message farmer2messageC = new Message 
+            {
+                Title = "Message C Title",
+                Body = "Here's a body of Message C",
+                StartDate = DateTime.Today,
+                EndDate = DateTime.Today.AddDays(7),
+                UserId = 2
+            };
+
+            Message farmer2messageD = new Message 
+            {
+                Title = "Message D Title",
+                Body = "Here's a body of Message D",
+                StartDate = DateTime.Today,
+                EndDate = DateTime.Today.AddDays(14),
+                UserId = 2
+            };
+
+            context.Messages.Add(farmer1messageA);
+            context.Messages.Add(farmer1messageB);
+            context.Messages.Add(farmer2messageC);
+            context.Messages.Add(farmer2messageD);
             context.SaveChanges();      
         }
     }
