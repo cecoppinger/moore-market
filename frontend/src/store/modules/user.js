@@ -6,7 +6,7 @@ const user = {
         currentUser: {
             id: 1,
             username: "user",
-            accountType: "vendor",
+            accountType: "user",
             isLoggedIn: true,
             location: {},
             favoriteMarkets: [1,3,5],

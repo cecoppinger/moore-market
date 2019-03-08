@@ -12,44 +12,37 @@
             <router-link to='/categories'> <button type="button" class="btn btn-success btn-lg" > Manage Categories </button> </router-link>
           </div>
         </div>
-        
-        
+        <FeedBox :vendorMessages="vendorMessages"></FeedBox>
+
       </div>
-      
-      <SummaryBox :sumBoxMessages="sumBoxMessages" class='m-3'></SummaryBox>
-      
-      <div class=farmerNav>
-      </div>
-      
       <farmer-product-dash></farmer-product-dash>
 
   </div>
 </template>
 
 <script>
-import SummaryBox from '../components/SummaryBox.vue';
+import FeedBox from '../components/FeedBox.vue';
 import FarmerProductDash from '../components/Product/FarmerProductDash.vue'
-
+import { mapActions, mapState } from 'vuex'
 export default {
   name: 'FarmDashboard',
   components: {
-      'SummaryBox': SummaryBox,
-      FarmerProductDash
-
+      FeedBox,
+      FarmerProductDash,
   },
   created() {
-  
+    this.getVendorMessages(this.currentUser.id)
   },
   computed: {
-    
+    ...mapState('user', ['currentUser']),
+    ...mapState('vendor', ['vendorMessages'])
   },
   methods: {
+    ...mapActions('vendor', ['getVendorMessages'])
     
   },
   data() {
       return {
-          messages: [],
-          sumBoxMessages: [],
           }
   }
 }
@@ -60,6 +53,4 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   text-align: center;
 }
-
-
 </style>
