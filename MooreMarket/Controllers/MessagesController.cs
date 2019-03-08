@@ -9,6 +9,7 @@ using MooreMarket.Models;
 
 namespace MooreMarket.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MessagesController : ControllerBase
@@ -21,6 +22,7 @@ namespace MooreMarket.Controllers
         }
         
         //GET Messages/
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(204)]

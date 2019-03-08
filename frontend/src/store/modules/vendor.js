@@ -59,36 +59,59 @@ const vendor = {
         .then(response => commit('setAllMessages', response.data))
     },
     // requires token
-    addNewMessage({ commit }, message) {
-      axios.post('/api/messages/add', message)
-        .then((res) => commit('setNewMessage', res.data))
-    },
-    // requires token
+    async addNewMessage({commit, dispatch}, message) {
+      let response;
+      try{
+          let axiosAuth = await dispatch('api/createAxiosAuth', '' ,{root:true});
+          if (axiosAuth) {
+              response = await axiosAuth.post('/api/messages/add', message);
+              commit('setNewMessage', response.data);
+              return response;
+          } else {
+              //No token
+              return false;
+          }
+      } catch (error) {
+          console.log(error);
+      }
+  },
     getVendorMessages({ commit }, id) {
       axios.get('api/vendors/'+id+'/messages')
         .then(response => commit('setVendorMessages', response.data))
     },
     // requires token
-    async editMessageById({ commit, getters }, message) {
+    async editMessageById({ commit, getters, dispatch }, message) {
       let response
       try{
-          response = await axios.put('/api/messages/edit/'+ message.id, message)
-          let idx = getters.getMessageIndex(response.data.id)
-          let payload = {'idx':idx, 'message':response.data}
-          commit('addEditedMessage', payload)
-          return response
+        let axiosAuth = await dispatch('api/createAxiosAuth', '' ,{root:true});
+        if (axiosAuth) {
+            response = await axiosAuth.put('/api/messages/edit/'+ message.id, message);
+            let idx = getters.getMessageIndex(response.data.id);
+            let payload = {'idx':idx, 'product':response.data};
+            commit('addEditedMessage', payload);
+            return response;
+        } else {
+            //No token
+            return false;
+        }
       } catch(error) {
           console.log(error)
       }
     },
     // requires token
-    async removeMessageById({ commit, getters }, id) {
+    async removeMessageById({ commit, getters, dispatch }, id) {
       let response
       try {
-        response = await axios.delete('/api/messages/remove/'+id)
-        let idx = getters.getMessageIndex(id)
-        commit('removeMessageByIndex', idx)
-        return response
+        let axiosAuth = await dispatch('api/createAxiosAuth', '' ,{root:true});
+        if (axiosAuth) {
+            response = await axiosAuth.delete('/api/messages/remove/'+ id);
+            let idx = getters.getMessageIndex(id);
+            commit('removeMessageByIndex', idx);
+            return response;
+        } else {
+            //No token
+            return false;
+        }
       }
       catch(error) {
         console.log(error)

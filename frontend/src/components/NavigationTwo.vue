@@ -33,10 +33,12 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Register</a>
+                    <router-link to="/login" class="nav-link">Login</router-link>
                 </li>
                 <li class="nav-item">
-                </li>    
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Register</a>
+                </li>
+                    
             </ul>
 
             <form action="/products/search" class="form-inline my-2 my-lg-0">

@@ -1,10 +1,10 @@
 <template>
   <div class="browse-farmer-products container">
     <div class="farmer-details">
-      <h3>{{ farmerProducts.username }}'s Inventory</h3>
+      <h3>{{ currentVendor.username }}'s Inventory</h3>
     </div>
-    <div class="product-listing" v-for="(product, idx) in farmerProducts.products" :key="idx">
-      <product-search-item :product="product" :farmer="farmerProducts"></product-search-item>
+    <div class="product-listing" v-for="(product, idx) in currentVendor.products" :key="idx">
+      <product-search-item :product="product" :vendor="currentVendor"></product-search-item>
     </div>
   </div>
 </template>
@@ -27,13 +27,13 @@ export default {
     },
   },
   computed: {
-    ...mapState('farmer', ['farmerProducts']),
+    ...mapState('vendor', ['currentVendor']),
   },
   methods: {
-    ...mapActions('farmer', ['getFarmerProducts']),
+    ...mapActions('vendor', ['getVendor']),
   },
   created() {
-    this.getFarmerProducts(this.id)
+    this.getVendor(this.id)
   },
 }
 </script>
