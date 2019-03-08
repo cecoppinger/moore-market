@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +41,20 @@ namespace MooreMarket.Controllers
       }
 
       return vendorProducts;
+    }
+
+    [HttpGet("{id}/messages")]
+    public IActionResult GetVendorMessages(int id)
+    {
+      IList<Message> vendorMessages = _context.Messages
+        .Where(u => u.UserId == id && u.EndDate >= DateTime.Today).ToList();
+
+      if(vendorMessages.Count == 0)
+      {
+        return NotFound();
+      }
+
+      return Ok(vendorMessages);
     }
   }
 }
