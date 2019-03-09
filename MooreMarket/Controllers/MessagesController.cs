@@ -44,6 +44,7 @@ namespace MooreMarket.Controllers
         }
 
         //GET Messages/{id}
+        [AllowAnonymous]
         [HttpGet("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -57,6 +58,22 @@ namespace MooreMarket.Controllers
             }
 
             return Ok(message);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("vendor/{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public IActionResult GetVendorMessages(int id)
+        {
+            IList<Message> messages = _context.Messages.Where(m => m.UserId == id).ToList();
+
+            if(messages == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(messages);
         }
 
         //POST Messages/Add
