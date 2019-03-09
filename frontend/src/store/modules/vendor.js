@@ -55,9 +55,15 @@ const vendor = {
       }
       
     },
-    getAllMessagesFromApi({ commit }) {
-      axios.get('/api/messages')
-        .then(response => commit('setAllMessages', response.data))
+    async getAllMessagesFromApi({ commit }) {
+      let response;
+      try {
+        response = await axios.get('/api/messages');
+        commit('setAllMessages', response.data);
+        return response;
+      } catch (error) {
+        console.log(error)
+      }
     },
     // requires token
     async addNewMessage({commit, dispatch}, message) {
@@ -76,9 +82,16 @@ const vendor = {
           console.log(error);
       }
   },
-    getVendorMessages({ commit }, id) {
-      axios.get('api/vendors/'+id+'/messages')
-        .then(response => commit('setVendorMessages', response.data))
+    async getVendorMessages({ commit }, id) {
+      let response;
+      try {
+        response = await axios.get('api/messages/vendor/'+ id);
+        commit('setVendorMessages', response.data);
+        return response;
+      } catch (error) {
+        console.log(error)
+      }
+
     },
     // requires token
     async editMessageById({ commit, getters, dispatch }, message) {
