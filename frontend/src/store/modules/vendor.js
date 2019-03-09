@@ -26,7 +26,8 @@ const vendor = {
       state.vendorMessages = messages
     },
     addEditedMessage(state, payload) {
-      state.vendorMessages.splice(payload.idx, 1, payload.message)
+      let {idx, message} = payload
+      state.vendorMessages.splice(idx, 1, message)
     },
     removeMessageByIndex(state, idx) {
       state.vendorMessages.splice(idx, 1)
