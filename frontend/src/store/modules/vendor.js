@@ -82,13 +82,13 @@ const vendor = {
     },
     // requires token
     async editMessageById({ commit, getters, dispatch }, message) {
-      let response
+      let response;
       try{
         let axiosAuth = await dispatch('api/createAxiosAuth', '' ,{root:true});
         if (axiosAuth) {
             response = await axiosAuth.put('/api/messages/edit/'+ message.id, message);
             let idx = getters.getMessageIndex(response.data.id);
-            let payload = {'idx':idx, 'product':response.data};
+            let payload = {'idx':idx, 'message':response.data};
             commit('addEditedMessage', payload);
             return response;
         } else {
