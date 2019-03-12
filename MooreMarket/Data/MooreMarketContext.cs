@@ -13,6 +13,8 @@ namespace MooreMarket.Data
         public DbSet<Product> Products {get;set;}
         public DbSet<ProductCategory> Categories {get; set;}
 
+        public DbSet<Message> Messages { get; set; }
+
         
     }
 }

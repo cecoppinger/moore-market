@@ -3,6 +3,9 @@
       <h1>This will be the User Dashboard</h1>
 
       <p>Your current position: Latitude({{latitude}}), Longitude({{longitude}})</p>
+      <button class="btn btn-primary mb-1" @click="showFeed = !showFeed">Toggle Feed box</button>
+      <UserFeed v-show="showFeed" :allMessages="allMessages"></UserFeed>
+
       <div class="row">
         <div class="col-8">
           <h4>Product List</h4>
@@ -17,14 +20,14 @@
           </ul>
         </div>
         <div class="col-4"> 
-          <h4>Farmer List</h4>
-          <div v-for="farmer in allFarmers" :key="farmer.id" class="card mx-2 my-2">
+          <h4>Vendor List</h4>
+          <div v-for="vendor in allVendors" :key="vendor.id" class="card mx-2 my-2">
             <img src="https://via.placeholder.com/75x35?text=farmer+logo" width="50" class="card-img-top" >
             <div class="card-body">
-              <h5 class="card-title">{{ farmer.username }}</h5>
+              <h5 class="card-title">{{ vendor.username }}</h5>
               <p class="card-text">Brief description of farmer's inventory, address or area of town</p>
-              <router-link :to="{name: 'BrowseInventory', params: { id: farmer.id },}"       
-                class="btn btn-primary">Visit {{ farmer.username}}'s storefront</router-link>
+              <router-link :to="{name: 'BrowseInventory', params: { id: vendor.id },}"       
+                class="btn btn-primary">Visit {{ vendor.username}}'s storefront</router-link>
             </div>
           </div>
         </div>
@@ -33,24 +36,27 @@
 </template>
 
 <script>
+import UserFeed from '../components/UserFeed.vue'
 import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'userdashboard',
   components: {
-      
+      UserFeed
   },
   data() {
     return {
       error: '',
       latitude: '',
-      longitude: ''
+      longitude: '',
+      showFeed: true
       }
   },
 
   created() {
-    this.getFarmers(),
-    this.getAllProductsFromApi()
+    this.getAllVendors(),
+    this.getAllMessagesFromApi()
+    //this.getAllProductsFromApi()
   },
 
   mounted(){
@@ -59,12 +65,12 @@ export default {
 
   computed: {
     ...mapState('product', ['allProducts']),
-    ...mapState('farmer', ['allFarmers'])
+    ...mapState('vendor', ['allVendors', 'allMessages'])
   },
 
   methods: {
-    ...mapActions('product', ['getAllProductsFromApi']),
-    ...mapActions('farmer', ['getFarmers']),
+    //...mapActions('product', ['getAllProductsFromApi']),
+    ...mapActions('vendor', ['getAllVendors', 'getAllMessagesFromApi']),
     getLocation() {
       if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(this.showPosition);

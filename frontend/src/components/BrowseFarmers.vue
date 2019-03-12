@@ -4,14 +4,14 @@
     <ul>
       <li 
       class="card"
-      v-for="farmer in allFarmers" :key="farmer.id"
+      v-for="vendor in allVendors" :key="vendor.id"
       ><router-link
       :to="{
         name: 'BrowseInventory',
-        params: { id: farmer.id },
+        params: { id: vendor.id },
       }" class="vendor-link">
         <div class="card-header">
-          {{ farmer.username }}'s items
+          {{ vendor.username }}'s items
         </div>
         <div class="card-body">
           <p>Some short description about their store</p>
@@ -28,13 +28,13 @@ import { mapState, mapActions } from 'vuex'
 export default {
   name: 'BrowseFarmers',
   methods: {
-    ...mapActions('farmer', ['getFarmers']),
+    ...mapActions('vendor', ['getAllVendors']),
   },
   created() {
-    this.getFarmers()
+    this.getAllVendors()
   },
   computed: {
-    ...mapState('farmer', ['allFarmers']),
+    ...mapState('vendor', ['allVendors']),
   }
 }
 </script>
