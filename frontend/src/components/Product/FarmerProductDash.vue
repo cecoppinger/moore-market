@@ -40,7 +40,7 @@ export default {
           'currentVendor'
         ]),
         ...mapState('user', [
-          'currentUser'
+          'user'
         ]),
     },
 
@@ -51,7 +51,7 @@ export default {
     },
 
     async created() {
-        await this.getVendor(this.currentUser.id)
+        await this.getVendor(this.user.id)
         
     },
 }

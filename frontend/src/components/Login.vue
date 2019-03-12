@@ -1,6 +1,7 @@
 <template>
     <div class="container-fluid moore-gradient moore-navy">
-        <div class="row">
+        <div v-if="!status.loggedIn && attempted">Username or password was incorrect</div>
+        <div class="row">            
             <form @submit.prevent='validateLogin'>
                 <div class="form-group">
                     <label for="inputUsername">Username</label>
@@ -17,7 +18,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
     name: 'Login',
@@ -25,22 +26,29 @@ export default {
     data() {
         return {
             username: '',
-            password: ''
+            password: '',
+            attempted: false,
         }
     },
-
+    computed: {
+      ...mapState('user', ['status'])
+    },
     methods: {
         ...mapActions('user', [
             'login'
         ]),
-
         async validateLogin() {
             if (this.username && this.password) {
                 let userDto = {
                 username: this.username,
                 password: this.password
                 };
-                await this.login(userDto);
+                let success = await this.login(userDto);
+                if(success) {
+                  this.$router.push('/dashboard')
+                } else {
+                  this.attempted = true
+                }
             }
             
             

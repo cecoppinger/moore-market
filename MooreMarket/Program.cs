@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MooreMarket.Data;
+using MooreMarket.Services;
 
 namespace MooreMarket
 {
@@ -24,8 +25,9 @@ namespace MooreMarket
 
                 try
                 {
-                    var context = services.GetRequiredService<MooreMarketContext>();    
-                    DbInitializer.Initialize(context);
+                    var context = services.GetRequiredService<MooreMarketContext>();
+                    var userService = services.GetRequiredService<IUserService>();    
+                    DbInitializer.Initialize(context, userService);
                 }
                 catch (Exception ex)
                 {

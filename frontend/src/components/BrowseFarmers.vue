@@ -4,7 +4,11 @@
     <ul>
       <li 
       class="card"
+<<<<<<< HEAD
       v-for="vendor in allVendors" :key="vendor.id"
+=======
+      v-for="farmer in allVendors" :key="farmer.id"
+>>>>>>> 17468e5faeb1225d77387d0ebff1da3716bed060
       ><router-link
       :to="{
         name: 'BrowseInventory',

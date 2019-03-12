@@ -9,7 +9,7 @@ using MooreMarket.Models;
 
 namespace MooreMarket.Controllers
 {
-    [Authorize]
+  [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase

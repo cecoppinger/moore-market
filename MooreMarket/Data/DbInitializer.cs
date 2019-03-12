@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MooreMarket.Dtos;
 using MooreMarket.Models;
+using MooreMarket.Services;
 
 namespace MooreMarket.Data 
 {
     public class DbInitializer
     {
-        public static void Initialize(MooreMarketContext context)
+        public static void Initialize(MooreMarketContext context, IUserService userService)
         {
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
@@ -15,37 +17,37 @@ namespace MooreMarket.Data
             UserModel farmer1 = new UserModel
             {
                 Username = "farmer1",
-                Password = "password",
                 AccountType = AccountType.Vendor
             };
+            farmer1 = userService.Create(farmer1, "password");
 
             UserModel farmer2 = new UserModel
             {
                 Username = "farmer2",
-                Password = "password",
                 AccountType = AccountType.Vendor
             };
+            farmer2 = userService.Create(farmer2, "password");            
 
             UserModel user1 = new UserModel
             {
                 Username = "user1",
-                Password = "password",
                 AccountType = AccountType.User
             };
+            user1 = userService.Create(user1, "password");
 
             UserModel user2 = new UserModel
             {
                 Username = "user2",
-                Password = "password",
                 AccountType = AccountType.User
             };
+            user2 = userService.Create(user2, "password");
 
-            context.Users.Add(farmer1);
-            context.Users.Add(farmer2);
-            context.Users.Add(user1);
-            context.Users.Add(user2);
+            // context.Users.Add(farmer1);
+            // context.Users.Add(farmer2);
+            // context.Users.Add(user1);
+            // context.Users.Add(user2);
 
-            context.SaveChanges();
+            // context.SaveChanges();
             
             ProductCategory TestCat1 = new ProductCategory("TestCategory1");
             TestCat1.Id = 1;

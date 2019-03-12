@@ -14,8 +14,8 @@ namespace MooreMarket.Models
         public string Username { get; set; }
         public string Email { get; set; }
         public int Id { get; set; }
-        public string Password { get; set; }
-        private byte[] StoredSalt { get; set; }
+        public byte[] Password { get; set; }
+        public byte[] StoredSalt { get; set; }
         public AccountType AccountType { get; set; } = AccountType.User;
 
         public IList<Product> Products { get; set; }

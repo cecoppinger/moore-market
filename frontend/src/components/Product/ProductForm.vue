@@ -172,7 +172,7 @@ export default {
       'allCategories'
     ]),
     ...mapState('user', [
-      'currentUser'
+      'user'
     ])
   },
   methods: {
@@ -246,7 +246,7 @@ export default {
         }
       }
       if(!this.checkErrors()) {
-        this.product.userId = this.currentUser.id
+        this.product.userId = this.user.id
         if(this.formType === 'add') {
           let res = await this.addNewProduct(this.product)
           console.log(res)

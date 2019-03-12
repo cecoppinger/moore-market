@@ -15,10 +15,11 @@ import BrowseInventory from '../components/BrowseInventory.vue'
 import AllProducts from '../components/Product/AllProducts.vue'
 import SearchProducts from '../components/Product/SearchProducts.vue'
 import ShoppingCart from '../components/ShoppingCart.vue'
+import vendor from '../store/modules/vendor';
 
 Vue.use(Router)
 
-export default new Router({
+export const router = new Router({
   mode: 'history',
   routes: [{
     name: 'Homepage',
@@ -79,4 +80,31 @@ export default new Router({
     component: Login
   }
   ],
-})
+});
+
+router.beforeEach((to, from, next) => {
+  const allowedRoutes = ['/login', 
+      '/register', 
+      '/dashboard', 
+      '/products/all', 
+      '/products/search',
+      '/farmers',
+      '/product'
+  ]
+  const allowedVendorRoutes = [
+      '/product/edit',
+      '/product/add',
+      '/categories',
+  ]
+  const user = JSON.parse(sessionStorage.getItem('user'))
+  const authRequired = !allowedRoutes.includes(to.path)
+  const vendorRequired = allowedVendorRoutes.includes(to.path)
+
+  if((authRequired && !user) || (vendorRequired && user.accountType === 'user')) {
+    next('/login')
+  }
+
+  next()
+});
+
+
