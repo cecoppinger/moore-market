@@ -20,13 +20,8 @@
           </ul>
         </div>
         <div class="col-4"> 
-<<<<<<< HEAD
           <h4>Vendor List</h4>
           <div v-for="vendor in allVendors" :key="vendor.id" class="card mx-2 my-2">
-=======
-          <h4>Farmer List</h4>
-          <div v-for="farmer in allVendors" :key="farmer.id" class="card mx-2 my-2">
->>>>>>> 17468e5faeb1225d77387d0ebff1da3716bed060
             <img src="https://via.placeholder.com/75x35?text=farmer+logo" width="50" class="card-img-top" >
             <div class="card-body">
               <h5 class="card-title">{{ vendor.username }}</h5>
@@ -60,12 +55,8 @@ export default {
 
   created() {
     this.getAllVendors(),
-<<<<<<< HEAD
     this.getAllMessagesFromApi()
     //this.getAllProductsFromApi()
-=======
-    this.getAllProductsFromApi()
->>>>>>> 17468e5faeb1225d77387d0ebff1da3716bed060
   },
 
   mounted(){
@@ -74,21 +65,12 @@ export default {
 
   computed: {
     ...mapState('product', ['allProducts']),
-<<<<<<< HEAD
     ...mapState('vendor', ['allVendors', 'allMessages'])
   },
 
   methods: {
     //...mapActions('product', ['getAllProductsFromApi']),
     ...mapActions('vendor', ['getAllVendors', 'getAllMessagesFromApi']),
-=======
-    ...mapState('vendor', ['allVendors'])
-  },
-
-  methods: {
-    ...mapActions('product', ['getAllProductsFromApi']),
-    ...mapActions('vendor', ['getAllVendors']),
->>>>>>> 17468e5faeb1225d77387d0ebff1da3716bed060
     getLocation() {
       if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(this.showPosition);

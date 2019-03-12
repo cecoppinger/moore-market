@@ -4,11 +4,7 @@
       <h3>{{ currentVendor.username }}'s Inventory</h3>
     </div>
     <div class="product-listing" v-for="(product, idx) in currentVendor.products" :key="idx">
-<<<<<<< HEAD
       <product-search-item :product="product" :vendor="currentVendor"></product-search-item>
-=======
-      <product-search-item :product="product" :farmer="currentVendor"></product-search-item>
->>>>>>> 17468e5faeb1225d77387d0ebff1da3716bed060
     </div>
   </div>
 </template>
@@ -34,19 +30,11 @@ export default {
     ...mapState('vendor', ['currentVendor']),
   },
   methods: {
-<<<<<<< HEAD
     ...mapActions('vendor', ['getVendor']),
   },
   created() {
     this.getVendor(this.id)
   },
-=======
-    ...mapActions('vendor', ['getVendor'])
-  },
-  created() {
-    this.getVendor(this.id)
-  }
->>>>>>> 17468e5faeb1225d77387d0ebff1da3716bed060
 }
 </script>
 

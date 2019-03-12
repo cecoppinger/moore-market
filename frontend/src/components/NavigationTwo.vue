@@ -33,18 +33,9 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <router-link to="/login" class="nav-link">Login</router-link>
-                </li>
-                <li class="nav-item">
-<<<<<<< HEAD
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Register</a>
-                </li>
-                    
-=======
                     <a v-if="user" class="nav-link" @click="logout">Logout</a>
                     <router-link v-else class="nav-link" to="/login">Login</router-link>
                 </li>    
->>>>>>> 17468e5faeb1225d77387d0ebff1da3716bed060
             </ul>
 
             <form action="/products/search" class="form-inline my-2 my-lg-0">
