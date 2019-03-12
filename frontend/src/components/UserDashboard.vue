@@ -18,7 +18,7 @@
         </div>
         <div class="col-4"> 
           <h4>Farmer List</h4>
-          <div v-for="farmer in allFarmers" :key="farmer.id" class="card mx-2 my-2">
+          <div v-for="farmer in allVendors" :key="farmer.id" class="card mx-2 my-2">
             <img src="https://via.placeholder.com/75x35?text=farmer+logo" width="50" class="card-img-top" >
             <div class="card-body">
               <h5 class="card-title">{{ farmer.username }}</h5>
@@ -49,7 +49,7 @@ export default {
   },
 
   created() {
-    this.getFarmers(),
+    this.getAllVendors(),
     this.getAllProductsFromApi()
   },
 
@@ -59,12 +59,12 @@ export default {
 
   computed: {
     ...mapState('product', ['allProducts']),
-    ...mapState('farmer', ['allFarmers'])
+    ...mapState('vendor', ['allVendors'])
   },
 
   methods: {
     ...mapActions('product', ['getAllProductsFromApi']),
-    ...mapActions('farmer', ['getFarmers']),
+    ...mapActions('vendor', ['getAllVendors']),
     getLocation() {
       if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(this.showPosition);

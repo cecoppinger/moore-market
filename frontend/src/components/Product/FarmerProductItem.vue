@@ -124,7 +124,7 @@ export default {
     },
     computed: {
         ...mapState('user', [
-            'currentUser'
+            'user'
         ])
     },
     methods: {
