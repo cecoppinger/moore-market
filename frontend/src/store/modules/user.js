@@ -3,20 +3,18 @@ import axios from 'axios';
 const user = {
     namespaced: true,
     state: {
-        currentUser: {
-            id: 1,
-            username: "user",
-            accountType: "vendor",
-            isLoggedIn: true,
-            location: {},
-            favoriteMarkets: [1,3,5],
-        },
+      user: null,
+      status: { },
     },
-
     mutations: {
       setUser(state, user) {
         state.user = user;
+        state.status = { loggedIn: true }
       },
+      logout(state) {
+        state.user = null;
+        state.status = {};
+      }
     },
 
     actions: {
@@ -25,15 +23,17 @@ const user = {
         try {
           response = await axios.post('api/user/login', userDto);
           if (response.status === 200) {
-            let {id, username, accountType, token} = response.data;
+            let {id, username, accountType, products, token} = response.data;
             let user = {
               id: id,
               username: username,
               // Refactor if more than two accountTypes
               accountType: (accountType === 0 ? 'vendor': 'user'),
-              isLoggedIn: true
+              products,
+              isLoggedIn: true,
+              token,
             };
-            sessionStorage.user = JSON.stringify({token:token});
+            sessionStorage.user = JSON.stringify(user);
             commit('setUser', user);
             return true;
           } else {
@@ -41,7 +41,7 @@ const user = {
             return false;
           }
         } catch (error) {
-          console.log(error);
+          return false
         }
       },
 
@@ -55,8 +55,11 @@ const user = {
           console.error(error);
         }
       },
+      logout({commit}) {
+        sessionStorage.removeItem('user')
+        commit('logout')
+      },
     },
-
     getters: {
     },
 }
