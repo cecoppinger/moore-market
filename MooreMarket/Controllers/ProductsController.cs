@@ -5,12 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MooreMarket.Data;
 using MooreMarket.Models;
-using Microsoft.AspNetCore.Authorization;
 
 
 namespace MooreMarket.Controllers
 {
-    [Authorize]
+  [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
