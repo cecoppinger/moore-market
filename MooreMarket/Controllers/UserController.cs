@@ -56,11 +56,12 @@ namespace MooreMarket.Controllers
 
           var token = tokenHandler.CreateToken(tokenDescriptor);
           var tokenString = tokenHandler.WriteToken(token);
-
+      
           return Ok(new {
             Id = user.Id,
             Username = user.Username,
             AccountType = user.AccountType,
+            Products = user.Products,
             Token = tokenString
           });
         }

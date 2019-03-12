@@ -4,6 +4,7 @@ using System.Linq;
 using MooreMarket.Helpers;
 using MooreMarket.Models;
 using MooreMarket.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MooreMarket.Services
 {
@@ -30,7 +31,9 @@ namespace MooreMarket.Services
         return null;
       }
 
-      var user = _context.Users.SingleOrDefault(u => u.Username == username);
+      var user = _context.Users
+          .Include(u => u.Products)
+          .SingleOrDefault(u => u.Username == username);
 
       if(user == null)
       {
