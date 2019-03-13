@@ -13,9 +13,6 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <router-link to="/" class="nav-link" exact >Home</router-link>
-                </li>
-                <li class="nav-item">
                     <router-link to="/dashboard" class="nav-link" >Dashboard</router-link>
                 </li>
                 <li class="nav-item">
@@ -26,16 +23,19 @@
                     Vendors
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <router-link to="/products/all" class="dropdown-item" href="#">View All Products</router-link>
-                    <router-link to="/farmers" class="dropdown-item" href="#">View All Vendors</router-link>
+                    <router-link to="/products/all" class="dropdown-item">View All Products</router-link>
+                    <router-link to="/farmers" class="dropdown-item">View All Vendors</router-link>
                     <!-- <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a> -->
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a v-if="user" class="nav-link" @click="logout">Logout</a>
-                    <router-link v-else class="nav-link" to="/login">Login</router-link>
-                </li>    
+                    <a v-if="user" class="nav-link mousePointer" @click="logout">Logout</a>
+                    <router-link v-else class="nav-link" to="/login">Login</router-link>                     
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/register">Register</router-link>
+                </li>  
             </ul>
 
             <form action="/products/search" class="form-inline my-2 my-lg-0">

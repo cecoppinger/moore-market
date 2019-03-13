@@ -15,7 +15,7 @@ import BrowseInventory from '../components/BrowseInventory.vue'
 import AllProducts from '../components/Product/AllProducts.vue'
 import SearchProducts from '../components/Product/SearchProducts.vue'
 import ShoppingCart from '../components/ShoppingCart.vue'
-import vendor from '../store/modules/vendor';
+import RegisterUser from '../components/RegisterUser.vue'
 
 Vue.use(Router)
 
@@ -78,6 +78,10 @@ export const router = new Router({
     name: 'Login',
     path: '/login',
     component: Login
+  }, {
+    name: 'Register',
+    path: '/register',
+    component: RegisterUser,
   }
   ],
 });
