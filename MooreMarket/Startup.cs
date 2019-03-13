@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
@@ -18,9 +20,12 @@ namespace MooreMarket
 {
   public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly ILogger _logger;
+        
+        public Startup(IConfiguration configuration, ILogger<Startup> logger)
         {
             Configuration = configuration;
+            _logger = logger;
         }
 
         public IConfiguration Configuration { get; }
@@ -44,6 +49,10 @@ namespace MooreMarket
             services.Configure<AppSettings>(appSettingsSection);
 
             var appSettings = appSettingsSection.Get<AppSettings>();
+            if (appSettings == null || (String.IsNullOrEmpty(appSettings.Secret))) {
+              _logger.LogError("No secret key provided in appsettings");
+              throw new ArgumentNullException("appSettings.secret is null or empty");
+            }
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             services.AddAuthentication(x =>
             {
@@ -76,7 +85,9 @@ namespace MooreMarket
                 ValidateAudience = false
               };
             });
-
+            
+            
+            
             services.AddScoped<IUserService, UserService>();
         }
 
