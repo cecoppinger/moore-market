@@ -52,20 +52,6 @@ namespace MooreMarket
             })
             .AddJwtBearer(x =>
             {
-              // x.Events = new JwtBearerEvents
-              // {
-              //   OnTokenValidated = context =>
-              //   {
-              //     var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
-              //     var userId = int.Parse(context.Principal.Identity.Name);
-              //     var user = userService.GetById(userId);
-              //     if(user == null)
-              //     {
-              //       context.Fail("Unauthorized");                  
-              //     }
-              //     return Task.CompletedTask;
-              //   }
-              // };
               x.RequireHttpsMetadata = false;
               x.SaveToken = true;
               x.TokenValidationParameters = new TokenValidationParameters
@@ -93,13 +79,6 @@ namespace MooreMarket
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
-            //enables cors globally, not needed for development while we are using the devServer proxy
-
-            // app.UseCors(x => x
-            //   .AllowAnyOrigin()
-            //   .AllowAnyMethod()
-            //   .AllowAnyHeader());
 
             app.UseAuthentication();
             app.UseHttpsRedirection();
