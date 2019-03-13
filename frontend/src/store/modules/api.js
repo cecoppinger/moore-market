@@ -12,7 +12,7 @@ const api = {
     actions: {
       createAxiosAuth() {
         if(sessionStorage.user) {
-            let {token} = JSON.parse(sessionStorage.user)
+            let { token } = JSON.parse(sessionStorage.user)
             let axiosAuth = axios.create({
                 headers: {
                     "X-Requested-With": "XMLHttpRequest",

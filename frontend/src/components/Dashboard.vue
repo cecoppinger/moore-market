@@ -1,7 +1,7 @@
 <template>
     <div class='moore-gradient moore-navy'>
-        <p>Current User's name: {{ currentUser.username }} | Account Type: {{ currentUser.accountType }}</p>
-        <farm-dashboard v-if="currentUser.accountType === 'vendor'"></farm-dashboard>
+        <p v-if="user">Current User's name: {{ user.username }} | Account Type: {{ user.accountType }}</p>
+        <farm-dashboard v-if="user && user.accountType === 'vendor'"></farm-dashboard>
         <user-dashboard v-else></user-dashboard>
     </div>
 </template>
@@ -18,7 +18,7 @@ export default {
     },
 
     computed: {
-        ...mapState('user', ['currentUser'])
+        ...mapState('user', ['user'])
     }
 }
 </script>

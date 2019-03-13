@@ -19,26 +19,23 @@
                     <router-link to="/dashboard" class="nav-link" >Dashboard</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link to="/product/add" class="nav-link" >Add Product</router-link>
+                    <router-link v-if="user && user.accountType === 'vendor'" to="/product/add" class="nav-link" >Add Product</router-link>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Vendors
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                    <router-link to="/products/all" class="dropdown-item" href="#">View All Products</router-link>
+                    <router-link to="/farmers" class="dropdown-item" href="#">View All Vendors</router-link>
+                    <!-- <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a> -->
                     </div>
                 </li>
                 <li class="nav-item">
-                    <router-link to="/login" class="nav-link">Login</router-link>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Register</a>
-                </li>
-                    
+                    <a v-if="user" class="nav-link" @click="logout">Logout</a>
+                    <router-link v-else class="nav-link" to="/login">Login</router-link>
+                </li>    
             </ul>
 
             <form action="/products/search" class="form-inline my-2 my-lg-0">
@@ -54,12 +51,18 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+
 export default {
   name: 'NavigationTwo',
   computed: {
     cart() {
       return this.$store.state.product.cart
-    }
+    },
+    ...mapState('user', ['user'])
+  },
+  methods: {
+    ...mapActions('user', ['logout'])
   }
 }
 </script>
